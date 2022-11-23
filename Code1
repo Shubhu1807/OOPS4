@@ -1,0 +1,87 @@
+#include <iostream>
+using namespace std;
+
+class Shape
+{
+  public:
+    double width, height, radius;
+  public:
+    void set_data (double a, double b, double c)
+    {
+        width = a;
+        height = b;
+        radius = c;
+    }
+    virtual double area() = 0;
+};
+
+class Rectangle: public Shape
+{
+public:
+    double area ()
+    {
+        return (width * height);
+    }
+};
+
+class Triangle: public Shape
+{
+public:
+double area ()
+    {
+        return (width * height)/2;
+    }
+};
+
+class Circle : public Shape
+{
+  public:
+    double area ()
+    {
+        return 3.1415 * (radius * radius);
+    }
+};
+
+int main()
+{
+    int N;
+    cin >> N;
+
+    Rectangle Rect;
+    Triangle Tri;
+    Circle Circ;
+    string* S = new string[N];
+
+    if(N == 1) {
+      cin >> Rect.height >> Rect.width;
+      cout << Rect.area();
+
+      return 0;
+    } 
+    else
+    {
+        for(int i = 0; i < N; i++)
+        {
+            cin >> S[i];
+
+            if(S[i] == "Rectangle")
+            {
+                cin >> Rect.height;
+                cin >> Rect.width;
+            }
+            else if(S[i] == "Triangle")
+            {
+                cin >> Tri.height;
+                cin >> Tri.width;
+            }
+            else if(S[i] == "Circle")
+            {
+                cin >> Circ.radius;
+            } 
+        }
+    }
+    cout << Rect.area() << " " << Tri.area() << " " << Circ.area();
+    delete [] S;
+
+    return 0;
+}
